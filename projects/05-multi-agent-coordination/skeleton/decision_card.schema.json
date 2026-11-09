@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Decision card",
+  "description": "Every decision the human must make arrives in this format. Synthetic example below.",
+  "type": "object",
+  "required": ["id", "title", "what", "effect", "options", "recommend", "why", "from", "priority", "status"],
+  "properties": {
+    "id": {"type": "string", "description": "<date>-<role>-<short name>"},
+    "title": {"type": "string", "description": "One-sentence question ending with '?'"},
+    "what": {"type": "string", "description": "Plain language, no internal codes"},
+    "effect": {"type": "string", "description": "Numbers with their unit (items vs rows vs product codes) and source file hash"},
+    "options": {
+      "type": "array", "minItems": 2, "maxItems": 4,
+      "items": {"type": "object", "required": ["key", "label", "detail"],
+                "properties": {"key": {"type": "string"}, "label": {"type": "string"},
+                               "detail": {"type": "string", "description": "What happens if chosen, incl. rollback for risky actions"}}}
+    },
+    "recommend": {"type": ["string", "null"]},
+    "why": {"type": "string"},
+    "from": {"type": "string"},
+    "priority": {"enum": ["P0", "P1", "P2"]},
+    "blocks": {"type": "string"},
+    "status": {"enum": ["open", "answered", "withdrawn"]},
+    "unverified": {"type": "array", "items": {"type": "string"}}
+  },
+  "examples": [{
+    "id": "20000101-A-discontinued",
+    "title": "Should discontinued products appear in the Top tier?",
+    "what": "Some recommended products are no longer sold but can be made to order.",
+    "effect": "120 items across 85 rows (synthetic numbers)",
+    "options": [
+      {"key": "top", "label": "Top, labeled", "detail": "Shown first with 'discontinued, may need custom production'."},
+      {"key": "optional", "label": "Optional only", "detail": "Still visible, never in the short list."}
+    ],
+    "recommend": "optional",
+    "why": "Keeps the short list actionable while not hiding the opportunity.",
+    "from": "A", "priority": "P1", "status": "open"
+  }]
+}

@@ -1,0 +1,17 @@
+{
+  "gold_id": "G-0001",
+  "version": 1,
+  "question_en": "What is the lower limit of quantification of Kit Z?",
+  "expected_type": "conflict",
+  "facts": [
+    {"claim": "Datasheet states 2 units/uL", "source_id": "kb:synthetic-0002", "locator": "Kit Z datasheet, page 2"},
+    {"claim": "Training deck slide 7 states 5 units/uL", "source_id": "kb:synthetic-0001", "locator": "Kit Z training deck, slide 7"}
+  ],
+  "forbidden": ["a single value stated without mentioning the conflict"],
+  "category": "product_spec",
+  "src_class": "official",
+  "difficulty": 2,
+  "status": "silver",
+  "split": "dev",
+  "note": "Synthetic example. Only human-verified items become gold; silver items are for development only."
+}
